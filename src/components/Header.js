@@ -1,7 +1,7 @@
 import Nav from "./Nav";
 const Header = {
     render: (name = 'WE17101') =>
-        `<div>
+        `<div style="margin-bottom:50px">
             <h1>${name}</h1>
             <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
                 <div class="container-fluid">
