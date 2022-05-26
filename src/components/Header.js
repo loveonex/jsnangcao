@@ -19,7 +19,7 @@ const Header = {
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <a class="navbar-brand mt-2 mt-lg-0" href="#">
                             <img
-                            src="https://mdbcdn.b-cdn.net/img/logo/mdb-transaprent-noshadows.webp"
+                            src="https://image.bnews.vn/MediaUpload/Medium/2020/03/30/fpt-new-logo.png"
                             height="15"
                             alt="MDB Logo"
                             loading="lazy"/>
@@ -67,7 +67,7 @@ const Header = {
                                 aria-expanded="false"
                             >
                                 <img
-                                    src="https://mdbcdn.b-cdn.net/img/new/avatars/2.webp"
+                                    src="https://icon-library.com/images/icon-user/icon-user-15.jpg"
                                     class="rounded-circle"
                                     height="25"
                                     alt="Black and White Portrait of a Man"
