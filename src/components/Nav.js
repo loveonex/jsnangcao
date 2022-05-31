@@ -9,7 +9,10 @@ const Nav = {
                 <a class="nav-link" href="/about">Giới Thiệu</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="news">Tin Tức</a>
+                <a class="nav-link" href="/news">Tin Tức</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/students">Sinh Viên</a>
             </li>
         </ul>
         `
