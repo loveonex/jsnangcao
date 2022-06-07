@@ -6,21 +6,42 @@ import Home from './pages/Home';
 import About from './pages/About';
 import News from './pages/News';
 import Student from './pages/Students'
+import StudentDetail from './pages/Student-detail'
+import StudentAdd from './pages/StudentAdd';
+import Product from './pages/Products';
+import ProductDetail from './pages/ProductDetail';
+import ProductAdd from './pages/ProductAdd';
+import StudentEdit from './pages/StudentEdit';
+import ProductEdit from './pages/ProductEdit';
 
 const router = new Navigo('/', { linksSelector: 'a' });
 
-const render = async(content) => {
+export const render = async(content, id) => {
     document.querySelector("#header").innerHTML = Header.render();
-    document.querySelector("#content").innerHTML = await content;
+    document.querySelector("#content").innerHTML = await content.render(id);
     document.querySelector("#footer").innerHTML = Footer.render();
+
+
+    if (content.afterRender) {
+        content.afterRender();
+    }
+
 }
 
-
 router.on({
-    '/': () => render(Home.render()),
-    '/about': () => render(About.render()),
-    '/news': () => render(News.render()),
-    '/students': () => render(Student.render()),
+    '/': () => render(Home),
+    '/about': () => render(About),
+    '/news': () => render(News),
+
+    '/students': () => render(Student),
+    '/students/add': () => render(StudentAdd),
+    '/students/detail/:id': ({ data }) => render(StudentDetail, data.id),
+    '/students/edit/:id': ({ data }) => render(StudentEdit, data.id),
+
+    '/products': () => render(Product),
+    '/products/add': () => render(ProductAdd),
+    '/products/detail/:id': ({ data }) => render(ProductDetail, data.id),
+    '/products/edit/:id': ({ data }) => render(ProductEdit, data.id),
 })
 
 router.resolve();

@@ -14,6 +14,9 @@ const Nav = {
             <li class="nav-item">
                 <a class="nav-link" href="/students">Sinh Viên</a>
             </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/products">Sản Phẩm</a>
+            </li>
         </ul>
         `
 }
