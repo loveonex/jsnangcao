@@ -1,47 +1,68 @@
 // import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
-import Navigo from 'navigo';
-import Header from "./components/Header";
-import Footer from "./components/Footer";
-import Home from './pages/Home';
-import About from './pages/About';
-import News from './pages/News';
-import Student from './pages/Students'
-import StudentDetail from './pages/Student-detail'
-import StudentAdd from './pages/StudentAdd';
-import Product from './pages/Products';
-import ProductDetail from './pages/ProductDetail';
-import ProductAdd from './pages/ProductAdd';
-import StudentEdit from './pages/StudentEdit';
-import ProductEdit from './pages/ProductEdit';
+// import Navigo from 'navigo';
+import Header from "./components/LayoutClient/Header";
+import Footer from "./components/LayoutClient/Footer";
+import Home from './pages/Client/Home';
+import About from './pages/Client/About';
+import News from './pages/Client/News';
+import Product from './pages/Client/Products';
+import ProductDetail from "./pages/Client/ProductDetail";
+import CartDetail from "./pages/Client/CartDetail";
 
-const router = new Navigo('/', { linksSelector: 'a' });
+import CategoriesList from "./pages/Admin/Categories/List";
+import CategoriesEdit from "./pages/Admin/Categories/Edit";
+import CategoriesAdd from "./pages/Admin/Categories/Add";
 
-export const render = async(content, id) => {
-    document.querySelector("#header").innerHTML = Header.render();
-    document.querySelector("#content").innerHTML = await content.render(id);
-    document.querySelector("#footer").innerHTML = Footer.render();
+import ProductAdd from "./pages/Admin/Products/Add";
+import ProductEdit from "./pages/Admin/Products/Edit";
+import ProductList from "./pages/Admin/Products/List";
+
+import ContentAdmin from "./components/LayoutAdmin/ContentAdmin";
+import HomeAdmin from "./pages/Admin/HomeAdmin";
+// const router = new Navigo('/', { linksSelector: 'a' });
+import router from "./helper/router";
+
+export const render = async(Header, Footer, content, id, rule) => {
+    if (Header) {
+        document.querySelector("#header").innerHTML = await Header.render();
+        document.querySelector("#footer").innerHTML = Footer.render();
+    }
+    document.querySelector("#content").innerHTML = await content.render(id, rule);
 
 
     if (content.afterRender) {
         content.afterRender();
     }
+    if (rule) {
+        if (rule.afterRender) {
+            rule.afterRender();
+        }
+    }
 
 }
 
 router.on({
-    '/': () => render(Home),
-    '/about': () => render(About),
-    '/news': () => render(News),
+    '/': () => render(Header, Footer, Home, undefined, undefined),
+    '/about': () => render(Header, Footer, About, undefined, undefined),
+    '/news': () => render(Header, Footer, News, undefined, undefined),
+    '/cart': () => render(Header, Footer, CartDetail, undefined, undefined),
 
-    '/students': () => render(Student),
-    '/students/add': () => render(StudentAdd),
-    '/students/detail/:id': ({ data }) => render(StudentDetail, data.id),
-    '/students/edit/:id': ({ data }) => render(StudentEdit, data.id),
+    '/products': () => render(Header, Footer, Product, undefined, undefined),
+    '/products/detail/:id': ({ data }) => render(Header, Footer, ProductDetail, data.id, undefined),
 
-    '/products': () => render(Product),
-    '/products/add': () => render(ProductAdd),
-    '/products/detail/:id': ({ data }) => render(ProductDetail, data.id),
-    '/products/edit/:id': ({ data }) => render(ProductEdit, data.id),
+    '/categories/:id': ({ data }) => render(Header, Footer, Product, data.id, undefined),
+
+
+    '/admin': () => render(undefined, undefined, ContentAdmin, undefined, HomeAdmin),
+
+    '/admin/products': () => render(undefined, undefined, ContentAdmin, undefined, ProductList),
+    '/admin/products/add': () => render(undefined, undefined, ContentAdmin, undefined, ProductAdd),
+    '/admin/products/edit/:id': ({ data }) => render(undefined, undefined, ContentAdmin, data.id, ProductEdit),
+
+    '/admin/categories': () => render(undefined, undefined, ContentAdmin, undefined, CategoriesList),
+    '/admin/categories/add': () => render(undefined, undefined, ContentAdmin, undefined, CategoriesAdd),
+    '/admin/categories/edit/:id': ({ data }) => render(undefined, undefined, ContentAdmin, data.id, CategoriesEdit)
+
 })
 
 router.resolve();

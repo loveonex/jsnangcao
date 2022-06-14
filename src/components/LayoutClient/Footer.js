@@ -2,6 +2,7 @@ const Footer = {
     render: (name = "Đây là Footer") => (
         `
         <div style="margin-top:50px">
+            <div class="container">
             <footer class="text-center text-lg-start bg-dark text-muted">
             <section
                 class="d-flex justify-content-center justify-content-lg-between p-4 border-bottom"
@@ -123,6 +124,7 @@ const Footer = {
                 Code By LOVEONEX
             </div>
             </footer>
+            <div>
         </div>
         `
     )
